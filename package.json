@@ -4,7 +4,10 @@
   "description": "un proyecto en el cual se configura inicio de sesion usando jwt y roles",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "serve": "babel-node ./src/index.js",
+    "clean": "rm -rf dist  && mkdir dist",
+    "build-babel": "babel -d ./dist ./src -s",
+    "build": "npm run clean && npm run build-babel"
   },
   "repository": {
     "type": "git",
@@ -15,5 +18,11 @@
   "bugs": {
     "url": "https://github.com/maurizi020/jwt-rols-project/issues"
   },
-  "homepage": "https://github.com/maurizi020/jwt-rols-project#readme"
+  "homepage": "https://github.com/maurizi020/jwt-rols-project#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.15.4",
+    "@babel/core": "^7.15.5",
+    "@babel/node": "^7.15.4",
+    "@babel/preset-env": "^7.15.6"
+  }
 }
