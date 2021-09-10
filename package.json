@@ -1,0 +1,19 @@
+{
+  "name": "jwt-rols-project",
+  "version": "1.0.0",
+  "description": "un proyecto en el cual se configura inicio de sesion usando jwt y roles",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maurizi020/jwt-rols-project.git"
+  },
+  "author": "Michele Sanseviero",
+  "license": "GPL-3.0-only",
+  "bugs": {
+    "url": "https://github.com/maurizi020/jwt-rols-project/issues"
+  },
+  "homepage": "https://github.com/maurizi020/jwt-rols-project#readme"
+}
