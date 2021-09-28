@@ -1,6 +1,7 @@
 import express from 'express';
 import morgan from 'morgan';
 import pkg from '../package.json';
+import products from './routes/product.routes';
 
 const app = express();
 app.use(morgan('dev'));
@@ -16,6 +17,6 @@ app.get("/", (req, res) => {
       author: app.get("pkg").author,
     });
   });
-app.use('/products', () => require('./routes/product.routes'));
+app.use('/products', products);
 
 export default app;
