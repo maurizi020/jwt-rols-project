@@ -1,5 +1,5 @@
 import DEBUG from 'debug';
-import { StatusCode } from 'http-status-codes';
+import StatusCode from 'http-status-codes';
 import Products from '../models/products';
 
 const debug = DEBUG('Controllers:Products');
