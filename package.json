@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "serve": "babel-node ./src/index.js",
+    "start": "npm run build && node ./dist/index.js",
     "clean": "rm -rf dist  && mkdir dist",
     "build-babel": "babel -d ./dist ./src -s",
     "build": "npm run clean && npm run build-babel"

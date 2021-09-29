@@ -2,17 +2,15 @@ version: "3.3"
 
 services: 
   api_server:
-    container_name: chat-room-api_server
+    container_name: jwt-example-api
     restart: always
     build: .
     ports: 
       - "3000:3000"
-      - "3001:3001"
     environment: 
       - DEBUG=databaseFile,index
       - MONGO_URL=mongodb://mongo/mydatabase
       - SERVER_PORT=3000
-      - WS_PORT=3001
     links: 
       - mongo
     volumes: 
