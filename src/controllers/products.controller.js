@@ -4,14 +4,21 @@ import Products from '../models/products';
 
 const debug = DEBUG('Controllers:Products');
 
+/**
+ *  Function to save a product object in the database
+ * @param {Express.Request} req
+ * @param {Express.Response} res
+ */
+
 const createProduct = async (req, res) => {
   const {
     name, category, price, imgURL,
   } = req.body;
-  const newProduct = new Products({
-    name, category, price, imgURL,
-  });
   try {
+    const newProduct = new Products({
+      name, category, price, imgURL,
+    });
+
     const newProductSaved = await newProduct.save();
     res.status(StatusCode.CREATED).send({ msg: 'the product has been created.', newProduct: newProductSaved });
   } catch (error) {
@@ -20,6 +27,10 @@ const createProduct = async (req, res) => {
   }
 };
 
+/**
+ * function to list all products in the database
+ * @param {Express.Response} res
+ */
 const getProducts = async (_, res) => {
   try {
     const productsList = await Products.find();
