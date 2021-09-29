@@ -1,8 +1,11 @@
+import DEBUG from 'debug';
 import app from './app';
+import './database';
+
+const debug = DEBUG('index');
 
 const port = process.env.SERVER_PORT || 4000;
 
 app.listen(port, () => {
-  // eslint-disable-next-line no-console
-  console.log('Escuchando en el puerto', port);
+  debug('Escuchando en el puerto', port);
 });
