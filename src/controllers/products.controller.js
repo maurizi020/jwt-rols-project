@@ -84,8 +84,25 @@ const updateProductById = async (req, res) => {
   }
 };
 
-const deleteProductById = (req, res) => {
-
+/**
+ * function to delete a specific product
+ * @param {Express.Request} req
+ * @param {Express.Response} res
+ */
+const deleteProductById = async (req, res) => {
+  const { params } = req;
+  if (mongoose.isValidObjectId(params.Id)) {
+    try {
+      await Products.findByIdAndDelete(params.Id);
+      res.status(StatusCodes.OK).json({ msg: 'the product has been delete.' });
+    } catch (error) {
+      debug(error);
+      res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ msg: 'Internal Server Error' });
+    }
+  } else {
+    debug(`HostName:${req.hostname} invalid Id: ${params.Id} is not valid`);
+    res.status(StatusCodes.BAD_REQUEST).json({ msg: 'Bad request' });
+  }
 };
 
 export {
