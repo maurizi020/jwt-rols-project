@@ -48,17 +48,17 @@ const getProducts = async (_, res) => {
  * @param {Express.Response} res
  */
 const getProductById = async (req, res) => {
-  const { query } = req;
-  if (mongoose.isValidObjectId(query.Id)) {
+  const { params } = req;
+  if (mongoose.isValidObjectId(params.Id)) {
     try {
-      const product = await Products.findById(query.Id);
+      const product = await Products.findById(params.Id);
       res.status(StatusCodes.OK).send(product);
     } catch (error) {
       debug(error);
       res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ msg: 'Internal Server Error' });
     }
   } else {
-    debug(`HostName:${req.hostname} invalid Id: ${query.Id} is not valid`);
+    debug(`HostName:${req.hostname} invalid Id: ${params.Id} is not valid`);
     res.status(StatusCodes.BAD_REQUEST).json({ msg: 'Bad request' });
   }
 };
@@ -69,17 +69,17 @@ const getProductById = async (req, res) => {
  * @param {Express.Response} res
  */
 const updateProductById = async (req, res) => {
-  const { query, body } = req;
-  if (mongoose.isValidObjectId(query.Id)) {
+  const { params, body } = req;
+  if (mongoose.isValidObjectId(params.Id)) {
     try {
-      const product = await Products.findByIdAndUpdate(query.Id, body, { new: true });
+      const product = await Products.findByIdAndUpdate(params.Id, body, { new: true });
       res.status(StatusCodes.OK).send(product);
     } catch (error) {
       debug(error);
       res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ msg: 'Internal Server Error' });
     }
   } else {
-    debug(`HostName:${req.hostname} invalid Id: ${query.Id} is not valid`);
+    debug(`HostName:${req.hostname} invalid Id: ${params.Id} is not valid`);
     res.status(StatusCodes.BAD_REQUEST).json({ msg: 'Bad request' });
   }
 };
@@ -90,17 +90,17 @@ const updateProductById = async (req, res) => {
  * @param {Express.Response} res
  */
 const deleteProductById = async (req, res) => {
-  const { query } = req;
-  if (mongoose.isValidObjectId(query.Id)) {
+  const { params } = req;
+  if (mongoose.isValidObjectId(params.Id)) {
     try {
-      await Products.findByIdAndDelete(query.Id);
+      await Products.findByIdAndDelete(params.Id);
       res.status(StatusCodes.OK).json({ msg: 'the product has been delete.' });
     } catch (error) {
       debug(error);
       res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ msg: 'Internal Server Error' });
     }
   } else {
-    debug(`HostName:${req.hostname} invalid Id: ${query.Id} is not valid`);
+    debug(`HostName:${req.hostname} invalid Id: ${params.Id} is not valid`);
     res.status(StatusCodes.BAD_REQUEST).json({ msg: 'Bad request' });
   }
 };
