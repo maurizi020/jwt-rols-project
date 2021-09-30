@@ -1,5 +1,6 @@
 import DEBUG from 'debug';
-import StatusCode from 'http-status-codes';
+import StatusCode, { StatusCodes } from 'http-status-codes';
+import mongoose from 'mongoose';
 import Products from '../models/products';
 
 const debug = DEBUG('Controllers:Products');
@@ -41,8 +42,25 @@ const getProducts = async (_, res) => {
   }
 };
 
-const getProductById = (req, res) => {
-
+/**
+ * Function to find a specific product using its id
+ * @param {Express.Request} req
+ * @param {Express.Response} res
+ */
+const getProductById = async (req, res) => {
+  const { query } = req;
+  if (mongoose.isValidObjectId(query.Id)) {
+    try {
+      const product = await Products.findById(query.Id);
+      res.status(StatusCodes.OK).send(product);
+    } catch (error) {
+      debug(error);
+      res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ msg: 'Internal Server Error' });
+    }
+  } else {
+    debug(`Invalid Id: ${query.Id} is not valid`);
+    res.status(StatusCodes.BAD_REQUEST).json({ msg: 'Bad request' });
+  }
 };
 
 const updateProductById = (req, res) => {
